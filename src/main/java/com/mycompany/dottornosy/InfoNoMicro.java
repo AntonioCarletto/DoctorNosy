@@ -9,8 +9,7 @@ import org.jsoup.select.Elements;
  * @author Antonio
  */
 /**
- * L'interfaccia JobAdNoMicro definisce gli oggetti ed i metodi per produrre un
- * annucnio senza microdati
+
  */
 public interface InfoNoMicro {
 

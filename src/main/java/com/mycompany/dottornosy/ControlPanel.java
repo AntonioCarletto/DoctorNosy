@@ -11,6 +11,10 @@ import javax.swing.JFrame;
 
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import javax.swing.JLabel;
+import javax.swing.JTabbedPane;
+import javax.swing.JPanel;
+import javax.swing.JProgressBar;
 
 /**
  *  DataLogger.Log(LOG_FLAG, "Start Crawler", LOG_FILE_NAME);
@@ -111,6 +115,18 @@ public class ControlPanel {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 1166, 595);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setLayout(null);
+		
+		JLabel lblNewLabel = new JLabel("New label");
+		lblNewLabel.setBounds(494, 36, 56, 16);
+		frame.getContentPane().add(lblNewLabel);
+		
+		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane.setBounds(12, 76, 1124, 459);
+		frame.getContentPane().add(tabbedPane);
+		
+		JPanel panel = new JPanel();
+		tabbedPane.addTab("New tab", null, panel, null);
 	}
 	
 	 private static void createDir(String nameDir) {
@@ -169,5 +185,4 @@ public class ControlPanel {
 	            }
 	        }
 	    }
-
 }
