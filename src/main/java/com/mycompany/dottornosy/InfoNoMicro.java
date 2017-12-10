@@ -15,11 +15,11 @@ public interface InfoNoMicro {
 
     Document exstractDoc(int page);
 
-    Elements exstractAds(int numPage);
+    Elements exstractInfo(int numPage);
 
-    String[] printAd(Element Ad);
+    String[] printInfo(Element Ad);
 
-    Integer countAds();
+    Integer countInfo();
 
     Integer getMaxSize();
 

@@ -17,15 +17,15 @@ public class ParserMicroHttps implements InfoMicro {
 		throw new UnsupportedOperationException("Not supported yet.");
 	}
 
-	public Elements exstractAds(int numPage) {
+	public Elements exstractInfo(int numPage) {
 		throw new UnsupportedOperationException("Not supported yet.");
 	}
 
-	public String[] printAd(Element Ad) {
+	public String[] printInfo(Element Ad) {
 		throw new UnsupportedOperationException("Not supported yet.");
 	}
 
-	public Integer countAds() {
+	public Integer countInfo() {
 		throw new UnsupportedOperationException("Not supported yet.");
 	}
 

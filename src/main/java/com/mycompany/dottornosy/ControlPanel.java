@@ -154,29 +154,29 @@ public class ControlPanel {
 
 	    }
 	 
-	 private static void SiteCrawling(String type, String webSite, String csvName) {
+	 private static void MultiPageCrawling(String type, String siteName, String csvName) {
 
-	        InfoAbstractFactory factoryNoMicro = FactoryProducer.getFactory(type);
-	        InfoNoMicro site = factoryNoMicro.getNoMicroInfo(webSite);
+	        InfoAbstractFactory factory = FactoryProducer.getFactory(type);
+	        InfoNoMicro siteNoMicro = factory.getNoMicroInfo(siteName);
 
-	        String[] InfoAd = new String[site.getMaxSize()];
+	        String[] InfoAd = new String[siteNoMicro.getMaxSize()];
 	        HashSet<String> hS = new HashSet<String>();
 
 
-	        for (int i = 2; i < site.getMaxPage(); i++) {
+	        for (int i = 2; i < siteNoMicro.getMaxPage(); i++) {
 
 	            DataLogger.Log(LOG_FLAG, "Pag." + i, LOG_FILE_NAME);
-	            Elements e = site.exstractAds(i);
+	            Elements e = siteNoMicro.exstractInfo(i);
 	            COUNT = hS.size();
 
 	            for (Element info : e) {
 
-	                InfoAd = site.printAd(info);
+	                InfoAd = siteNoMicro.printInfo(info);
 	                hS.add(InfoAd[1]);
 	                COUNT2 = hS.size();
 
 	                if (COUNT != COUNT2) {
-	                    CsvWriting.csvWriter(InfoAd, site.getMaxSize(), csvName);
+	                    CsvWriting.csvWriter(InfoAd, siteNoMicro.getMaxSize(), csvName);
 	                    DataLogger.Log(LOG_FLAG, "Annuncio: " + InfoAd[0], LOG_FILE_NAME);
 	                } else {
 	                    DataLogger.Log(LOG_FLAG, "Annuncio: " + InfoAd[0] + " giÃ  presente.", LOG_FILE_NAME);

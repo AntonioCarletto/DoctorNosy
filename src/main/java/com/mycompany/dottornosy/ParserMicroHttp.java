@@ -47,15 +47,15 @@ public class ParserMicroHttp implements InfoMicro {
         return doc;
     }
 
-    public Elements exstractAds(int page) {
+    public Elements exstractInfo(int page) {
 
         exstractDoc(page);
         ads = doc.body().select(/** Inserire l'informazione generica da estrarre **/"");
-        DataLogger.Log(LG, "Informazioni estratte dalla pagina " + page + ": " + countAds(),LFN);
+        DataLogger.Log(LG, "Informazioni estratte dalla pagina " + page + ": " + countInfo(),LFN);
         return ads;
     }
 
-    public String[] printAd(Element Ad) {
+    public String[] printInfo(Element Ad) {
 
         String[] m = new String[MAX_SIZE];
 
@@ -79,7 +79,7 @@ public class ParserMicroHttp implements InfoMicro {
         return m;
     }
 
-    public Integer countAds() {
+    public Integer countInfo() {
         adCount = ads.size();
         return adCount;
 
