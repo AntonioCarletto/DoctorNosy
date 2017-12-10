@@ -1,6 +1,7 @@
 package com.mycompany.dottornosy;
 
 import java.awt.EventQueue;
+import java.awt.Image;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -11,10 +12,15 @@ import javax.swing.JFrame;
 
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+
+import info.antoniocarletto.java.HostTraslate.HostTraslate;
+
 import javax.swing.JLabel;
 import javax.swing.JTabbedPane;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
+import javax.swing.ImageIcon;
+import java.awt.Toolkit;
 
 /**
  *  DataLogger.Log(LOG_FLAG, "Start Crawler", LOG_FILE_NAME);
@@ -113,12 +119,14 @@ public class ControlPanel {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.setIconImage(Toolkit.getDefaultToolkit().getImage(ControlPanel.class.getResource("/Image/iconaDoctorNosy.png")));
 		frame.setBounds(100, 100, 1166, 595);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setBounds(494, 36, 56, 16);
+		lblNewLabel.setIcon(new ImageIcon(ControlPanel.class.getResource("/Image/logo2.png")));
+		lblNewLabel.setBounds(-27, -15, 1124, 133);
 		frame.getContentPane().add(lblNewLabel);
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
@@ -127,6 +135,13 @@ public class ControlPanel {
 		
 		JPanel panel = new JPanel();
 		tabbedPane.addTab("New tab", null, panel, null);
+		
+		ImageIcon icon = new ImageIcon(Do.class.getResource("/Image/logo.png"));
+		Image scaledImage = icon.getImage().getScaledInstance(600, 200, Image.SCALE_DEFAULT);
+		icon.setImage(scaledImage);
+		JLabel lblNewLabel = new JLabel(icon);
+		lblNewLabel.setBounds(12, 13, 932, 146);
+		frmHostTranslate.getContentPane().add(lblNewLabel);
 	}
 	
 	 private static void createDir(String nameDir) {
