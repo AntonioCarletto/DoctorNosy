@@ -13,7 +13,6 @@ import javax.swing.JFrame;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import info.antoniocarletto.java.HostTraslate.HostTraslate;
 
 import javax.swing.JLabel;
 import javax.swing.JTabbedPane;
@@ -21,6 +20,8 @@ import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.ImageIcon;
 import java.awt.Toolkit;
+import javax.swing.JTextField;
+import javax.swing.JButton;
 
 /**
  *  DataLogger.Log(LOG_FLAG, "Start Crawler", LOG_FILE_NAME);
@@ -89,7 +90,10 @@ public class ControlPanel {
 	public static int COUNT;
 	public static int COUNT2;
 
-	private JFrame frame;
+	private JFrame frmDoctorNosy;
+	private JTextField textField;
+	private JTextField textField_1;
+	private JTextField textField_2;
 
 	/**
 	 * Launch the application.
@@ -99,7 +103,7 @@ public class ControlPanel {
 			public void run() {
 				try {
 					ControlPanel window = new ControlPanel();
-					window.frame.setVisible(true);
+					window.frmDoctorNosy.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -118,30 +122,64 @@ public class ControlPanel {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.setIconImage(Toolkit.getDefaultToolkit().getImage(ControlPanel.class.getResource("/Image/iconaDoctorNosy.png")));
-		frame.setBounds(100, 100, 1166, 595);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
-		
-		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setIcon(new ImageIcon(ControlPanel.class.getResource("/Image/logo2.png")));
-		lblNewLabel.setBounds(-27, -15, 1124, 133);
-		frame.getContentPane().add(lblNewLabel);
+		frmDoctorNosy = new JFrame();
+		frmDoctorNosy.setResizable(false);
+		frmDoctorNosy.setTitle("Doctor Nosy");
+		frmDoctorNosy.setIconImage(Toolkit.getDefaultToolkit().getImage(ControlPanel.class.getResource("/Image/iconaDoctorNosy.png")));
+		frmDoctorNosy.setBounds(100, 100, 1166, 595);
+		frmDoctorNosy.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmDoctorNosy.getContentPane().setLayout(null);
+//		
+//		JLabel lblNewLabel = new JLabel("New label");
+//		lblNewLabel.setIcon(new ImageIcon(ControlPanel.class.getResource("/Image/logo2.png")));
+//		lblNewLabel.setBounds(-27, -15, 1124, 133);
+//		frame.getContentPane().add(lblNewLabel);
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setBounds(12, 76, 1124, 459);
-		frame.getContentPane().add(tabbedPane);
+		tabbedPane.setBounds(12, 162, 1124, 373);
+		frmDoctorNosy.getContentPane().add(tabbedPane);
 		
 		JPanel panel = new JPanel();
 		tabbedPane.addTab("New tab", null, panel, null);
+		panel.setLayout(null);
 		
-		ImageIcon icon = new ImageIcon(Do.class.getResource("/Image/logo.png"));
+		JLabel lblNewLabel_1 = new JLabel("New label");
+		lblNewLabel_1.setBounds(49, 28, 56, 16);
+		panel.add(lblNewLabel_1);
+		
+		textField = new JTextField();
+		textField.setBounds(39, 57, 116, 22);
+		panel.add(textField);
+		textField.setColumns(10);
+		
+		JLabel lblNewLabel_2 = new JLabel("New label");
+		lblNewLabel_2.setBounds(233, 28, 56, 16);
+		panel.add(lblNewLabel_2);
+		
+		textField_1 = new JTextField();
+		textField_1.setBounds(222, 57, 116, 22);
+		panel.add(textField_1);
+		textField_1.setColumns(10);
+		
+		JLabel lblNewLabel_3 = new JLabel("New label");
+		lblNewLabel_3.setBounds(414, 28, 56, 16);
+		panel.add(lblNewLabel_3);
+		
+		textField_2 = new JTextField();
+		textField_2.setBounds(405, 57, 116, 22);
+		panel.add(textField_2);
+		textField_2.setColumns(10);
+		
+		JButton btnNewButton = new JButton("New button");
+		btnNewButton.setBounds(39, 92, 482, 22);
+		panel.add(btnNewButton);
+		
+		ImageIcon icon = new ImageIcon(ControlPanel.class.getResource("/Image/logo2.png"));
 		Image scaledImage = icon.getImage().getScaledInstance(600, 200, Image.SCALE_DEFAULT);
 		icon.setImage(scaledImage);
 		JLabel lblNewLabel = new JLabel(icon);
-		lblNewLabel.setBounds(12, 13, 932, 146);
-		frmHostTranslate.getContentPane().add(lblNewLabel);
+		lblNewLabel.setBounds(214, 23, 712, 153);
+		frmDoctorNosy.getContentPane().add(lblNewLabel);
 	}
 	
 	 private static void createDir(String nameDir) {
