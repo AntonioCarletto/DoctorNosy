@@ -22,6 +22,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JPanel;
+import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -30,60 +31,9 @@ import java.awt.event.ActionListener;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
+import javax.swing.JRadioButton;
 
 /**
- *  DataLogger.Log(LOG_FLAG, "Start Crawler", LOG_FILE_NAME);
-        createDir(CSV_DIR_NAME);
-
-        switch (args.length) {
-            case 1:
-
-                if (args[0].equalsIgnoreCase("BAKEKA")) {
-                    SiteCrawling("NO_MICRO", "BAKEKA", CSV_FILE_NAME);
-                } else if (args[0].equalsIgnoreCase("SUBITO")) {
-                    SiteCrawling("NO_MICRO", "SUBITO", CSV_FILE_NAME);
-                } else if (args[0].equalsIgnoreCase("OGGILAVORO")) {
-                    SiteCrawling("NO_MICRO", "OGGILAVORO", CSV_FILE_NAME);
-                } else {
-                    SiteCrawling("NO_MICRO", "BAKEKA", CSV_FILE_NAME);
-                    SiteCrawling("NO_MICRO", "SUBITO", CSV_FILE_NAME);
-                    SiteCrawling("NO_MICRO", "OGGILAVORO", CSV_FILE_NAME);
-
-                }
-                break;
-            case 2:
-                System.out.println("secondo if");
-                if (args[0].equalsIgnoreCase("BAKEKA") && !(args[1].isEmpty())) {
-                    SiteCrawling("NO_MICRO", "BAKEKA", args[1] + ".csv");
-
-                } else if (args[0].equalsIgnoreCase("SUBITO") && !(args[1].isEmpty())) {
-                    SiteCrawling("NO_MICRO", "SUBITO", args[1] + ".csv");
-
-                } else if (args[0].equalsIgnoreCase("OGGILAVORO") && !(args[1].isEmpty())) {
-                    SiteCrawling("NO_MICRO", "OGGILAVORO", args[1] + ".csv");
-                } else if (args[0].equalsIgnoreCase("ALL") && !(args[1].isEmpty())) {
-                    SiteCrawling("NO_MICRO", "BAKEKA", args[1] + ".csv");
-                    SiteCrawling("NO_MICRO", "SUBITO", args[1] + ".csv");
-                    SiteCrawling("NO_MICRO", "OGGILAVORO", args[1] + ".csv");
-
-                } else {
-
-                    SiteCrawling("NO_MICRO", "BAKEKA", args[1] + ".csv");
-                    SiteCrawling("NO_MICRO", "SUBITO", args[1] + ".csv");
-                    SiteCrawling("NO_MICRO", "OGGILAVORO", args[1] + ".csv");
-
-                }
-                break;
-            default:
-
-                SiteCrawling("NO_MICRO", "BAKEKA", CSV_FILE_NAME);
-                SiteCrawling("NO_MICRO", "SUBITO", CSV_FILE_NAME);
-                SiteCrawling("NO_MICRO", "OGGILAVORO", CSV_FILE_NAME);
-                break;
-        }
-
-        DataLogger.Log(LOG_FLAG, "Crawling done!", LOG_FILE_NAME);
-
  * @author Antonio
  *
  */
@@ -109,7 +59,10 @@ public class ControlPanel {
 	private JTextField texthostRemote;
 	private JTextField textCanonicRemote;
 	private JTextField textInsert;
-
+	private String nomeRicerca;
+	private String cognomeRicerca;
+	private String cittàRicerca;
+	private String struttura;
 	/**
 	 * Launch the application.
 	 */
@@ -139,6 +92,7 @@ public class ControlPanel {
 	 * @throws UnknownHostException 
 	 */
 	private void initialize() throws UnknownHostException {
+		
 		frmDoctorNosy = new JFrame();
 		frmDoctorNosy.setResizable(false);
 		frmDoctorNosy.setTitle("Doctor Nosy");
@@ -315,35 +269,103 @@ public class ControlPanel {
 		panelloDNosy.setLayout(null);
 		
 		JLabel lblNewLabe = new JLabel("Nome:");
-		lblNewLabe.setBounds(405, 16, 83, 16);
+		lblNewLabe.setBounds(344, 13, 83, 16);
 		panelloDNosy.add(lblNewLabe);
 		
 		textFieldNome = new JTextField();
-		textFieldNome.setBounds(488, 13, 116, 22);
+		textFieldNome.setToolTipText("");
+		textFieldNome.setBounds(427, 10, 116, 22);
 		panelloDNosy.add(textFieldNome);
 		textFieldNome.setColumns(10);
 		
 		JLabel lblNewLabel_2 = new JLabel("Cognome:");
-		lblNewLabel_2.setBounds(405, 45, 83, 16);
+		lblNewLabel_2.setBounds(344, 42, 83, 16);
 		panelloDNosy.add(lblNewLabel_2);
 		
 		textFieldCognome = new JTextField();
-		textFieldCognome.setBounds(488, 42, 116, 22);
+		textFieldCognome.setBounds(427, 39, 116, 22);
 		panelloDNosy.add(textFieldCognome);
 		textFieldCognome.setColumns(10);
 		
 		JLabel lblNewLabel_3 = new JLabel("Città:");
-		lblNewLabel_3.setBounds(405, 74, 56, 16);
+		lblNewLabel_3.setBounds(344, 71, 56, 16);
 		panelloDNosy.add(lblNewLabel_3);
 		
 		textFieldCittà = new JTextField();
-		textFieldCittà.setBounds(488, 74, 116, 22);
+		textFieldCittà.setBounds(427, 71, 116, 22);
 		panelloDNosy.add(textFieldCittà);
 		textFieldCittà.setColumns(10);
 		
-		JButton btnNewButton = new JButton("Nosy");
-		btnNewButton.setBounds(405, 109, 199, 25);
-		panelloDNosy.add(btnNewButton);
+		final JRadioButton MicroRadioButton = new JRadioButton("Con Microdati");
+		MicroRadioButton.setToolTipText("Estrae informazioni da siti che contengono Microdati");
+		MicroRadioButton.setBounds(569, 9, 127, 25);
+		panelloDNosy.add(MicroRadioButton);
+		
+		final JRadioButton NoMicroRadioButton = new JRadioButton("Senza Microdati");
+		NoMicroRadioButton.setToolTipText("Estrae informazioni da siti che non contngono Microdati");
+		NoMicroRadioButton.setSelected(true);
+		NoMicroRadioButton.setBounds(569, 38, 127, 25);
+		panelloDNosy.add(NoMicroRadioButton);
+		
+		final JRadioButton entrambiRadioButton = new JRadioButton("Entrambi");
+		entrambiRadioButton.setToolTipText("Estrae informazioni sia dai siti con Microdati che senza");
+		entrambiRadioButton.setBounds(569, 67, 127, 25);
+		panelloDNosy.add(entrambiRadioButton);
+		
+		ButtonGroup bg = new ButtonGroup();
+		bg.add(MicroRadioButton);
+		bg.add(NoMicroRadioButton);
+		bg.add(entrambiRadioButton);
+		
+		
+		JButton nosyButton = new JButton("Nosy");
+		nosyButton.addActionListener(new ActionListener() {
+
+
+			public void actionPerformed(ActionEvent e) {
+				
+				
+				DataLogger.Log(LOG_FLAG, "Start Crawler", LOG_FILE_NAME);
+		        createDir(CSV_DIR_NAME);
+				
+		        nomeRicerca = textFieldNome.getText();
+		        cognomeRicerca = textFieldCognome.getText();
+		        cittàRicerca = textFieldCittà.getText();
+
+		        if(MicroRadioButton.isSelected()) {
+		        	struttura = "micro";
+		        } else if (NoMicroRadioButton.isSelected()) {
+		        	struttura = "nomicro";
+		        } else {
+		        	struttura = "entrambi";
+		        }
+		        
+		        
+		        
+
+		        if(struttura.equalsIgnoreCase("MICRO")) {
+		        	MultiPageCrawling(struttura, "parsermicrohttp", CSV_FILE_NAME);
+		        	MultiPageCrawling(struttura, "parsermicrohttps", CSV_FILE_NAME);
+		        } else if (struttura.equalsIgnoreCase("NOMICRO")) {
+		        	MultiPageCrawling(struttura, "facebook", CSV_FILE_NAME);
+		        	MultiPageCrawling(struttura, "instagram", CSV_FILE_NAME);
+		        	MultiPageCrawling(struttura, "twitter", CSV_FILE_NAME);
+		        } else {
+		        	MultiPageCrawling(struttura, "parsermicrohttp", CSV_FILE_NAME);
+		        	MultiPageCrawling(struttura, "parsermicrohttps", CSV_FILE_NAME);
+		        	MultiPageCrawling("NOMICRO", "facebook", CSV_FILE_NAME);
+		        	MultiPageCrawling("NOMICRO", "instagram", CSV_FILE_NAME);
+		        	MultiPageCrawling("NOMICRO", "twitter", CSV_FILE_NAME);
+		        	
+		        }
+		        
+		        
+		        
+		        
+			}
+		});
+		nosyButton.setBounds(344, 106, 352, 25);
+		panelloDNosy.add(nosyButton);
 		
 	}
 	
@@ -363,9 +385,9 @@ public class ControlPanel {
 	                mdBW.write("This folder contains all the csv reports.");
 	                mdBW.close();
 
-	                DataLogger.Log(LOG_FLAG, "La directory " + nameDir + " Ã¨ stata creata;", LOG_FILE_NAME);
+	                DataLogger.Log(LOG_FLAG, "La directory " + nameDir + " è stata creata;", LOG_FILE_NAME);
 	            } else {
-	                DataLogger.Log(LOG_FLAG, "La directory " + nameDir + " esiste giÃ ;", LOG_FILE_NAME);
+	                DataLogger.Log(LOG_FLAG, "La directory " + nameDir + " esiste già;", LOG_FILE_NAME);
 	            }
 
 	        } catch (IOException mdE) {
@@ -376,32 +398,32 @@ public class ControlPanel {
 	 
 	 
 	 
-	 private static void MultiPageCrawling(String type, String siteName, String csvName) {
+	 private static void MultiPageCrawling(String type, String parserName, String csvName) {
 
 	        InfoAbstractFactory factory = FactoryProducer.getFactory(type);
-	        InfoNoMicro siteNoMicro = factory.getNoMicroInfo(siteName);
+	        InfoNoMicro siteParser = factory.getNoMicroInfo(parserName);
 
-	        String[] InfoAd = new String[siteNoMicro.getMaxSize()];
-	        HashSet<String> hS = new HashSet<String>();
+	        String[] arrayInfo = new String[siteParser.getMaxSize()];
+	        HashSet<String> hashSetMacher = new HashSet<String>();
 
 
-	        for (int i = 2; i < siteNoMicro.getMaxPage(); i++) {
+	        for (int i = 1; i < siteParser.getMaxPage(); i++) {
 
 	            DataLogger.Log(LOG_FLAG, "Pag." + i, LOG_FILE_NAME);
-	            Elements e = siteNoMicro.exstractInfo(i);
-	            COUNT = hS.size();
+	            Elements e = siteParser.exstractInfo(i);
+	           
 
 	            for (Element info : e) {
 
-	                InfoAd = siteNoMicro.printInfo(info);
-	                hS.add(InfoAd[1]);
-	                COUNT2 = hS.size();
+	                arrayInfo = siteParser.printInfo(info);
+	                hashSetMacher.add(arrayInfo[1]);
+	             
 
 	                if (COUNT != COUNT2) {
-	                    CsvWriting.csvWriter(InfoAd, siteNoMicro.getMaxSize(), csvName);
-	                    DataLogger.Log(LOG_FLAG, "Annuncio: " + InfoAd[0], LOG_FILE_NAME);
+	                    CsvWriting.csvWriter(arrayInfo, siteParser.getMaxSize(), csvName);
+	                    DataLogger.Log(LOG_FLAG, "Informazione: " + arrayInfo[0], LOG_FILE_NAME);
 	                } else {
-	                    DataLogger.Log(LOG_FLAG, "Annuncio: " + InfoAd[0] + " giÃ  presente.", LOG_FILE_NAME);
+	                    DataLogger.Log(LOG_FLAG, "Informazione: " + arrayInfo[0] + " già  presente.", LOG_FILE_NAME);
 	                }
 
 	            }
