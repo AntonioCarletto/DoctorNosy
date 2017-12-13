@@ -13,7 +13,12 @@ public class InfoNoMicroFactory extends InfoAbstractFactory {
 
 	@Override
 	public InfoMicro getMicroInfo(String choise) {
+		throw new UnsupportedOperationException("Errore nel metodo getMicroInfo() della classe InfoNoMicroFactory.");
+	}
 
+	@Override
+	public InfoNoMicro getNoMicroInfo(String choise) {
+		
 		if (choise.equalsIgnoreCase("")) {
 			return null;
 		} else if (choise.equalsIgnoreCase("")) {
@@ -22,14 +27,7 @@ public class InfoNoMicroFactory extends InfoAbstractFactory {
 		} else if (choise.equalsIgnoreCase("")) {
 			return null;
 		}
-
-		throw new UnsupportedOperationException("Errore nel metodo getJobAdNM() della classe JobAdNoMicroFactory.");
-
-	}
-
-	@Override
-	public InfoNoMicro getNoMicroInfo(String choise) {
-		throw new UnsupportedOperationException("Errore nel metodo getJobAd() della classe JobAdNoMicroFactory.");
+		throw new UnsupportedOperationException("Errore nel metodo getNoMicroInfo() della classe InfoNoMicroFactory.");
 
 	}
 }

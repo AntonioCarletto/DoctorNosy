@@ -404,8 +404,6 @@ public class ControlPanel {
 	        InfoNoMicro siteParser = factory.getNoMicroInfo(parserName);
 
 	        String[] arrayInfo = new String[siteParser.getMaxSize()];
-	        HashSet<String> hashSetMacher = new HashSet<String>();
-
 
 	        for (int i = 1; i < siteParser.getMaxPage(); i++) {
 
@@ -414,18 +412,9 @@ public class ControlPanel {
 	           
 
 	            for (Element info : e) {
-
 	                arrayInfo = siteParser.printInfo(info);
-	                hashSetMacher.add(arrayInfo[1]);
-	             
-
-	                if (COUNT != COUNT2) {
-	                    CsvWriting.csvWriter(arrayInfo, siteParser.getMaxSize(), csvName);
-	                    DataLogger.Log(LOG_FLAG, "Informazione: " + arrayInfo[0], LOG_FILE_NAME);
-	                } else {
-	                    DataLogger.Log(LOG_FLAG, "Informazione: " + arrayInfo[0] + " già  presente.", LOG_FILE_NAME);
-	                }
-
+	                CsvWriting.csvWriter(arrayInfo, siteParser.getMaxSize(), csvName);
+	                DataLogger.Log(LOG_FLAG, "Informazione: " + arrayInfo[0], LOG_FILE_NAME);
 	            }
 	        }
 	    }
